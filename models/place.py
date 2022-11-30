@@ -44,7 +44,7 @@ class Place(BaseModel, Base):
             from models.amenity import Amenity
             return [amenity for amenity in list(storage.all(Amenity).values()) if amenity.id in self.amenity_ids]
 
-        @setter.amenities
+        @amenities.setter
         def amenities(self, obj):
             if obj is not None:
                 self.amenity_ids.append(obj.id)
