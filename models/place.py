@@ -32,7 +32,7 @@ class Place(BaseModel, Base):
     amenities = relationship("Amenity", secondary="place_amenity", viewonly=False)
 
     if os.getenv('HBNB_TYPE_STORAGE') != 'db':
-        from models.amenity import Amenity
+        
         @property
         def reviews(self):
             from models import storage
@@ -41,6 +41,7 @@ class Place(BaseModel, Base):
         @property
         def amenities(self):
             from models import storage
+            from models.amenity import Amenity
             return [amenity for amenity in list(storage.all(Amenity).values()) if amenity.id in self.amenity_ids]
 
         @setter.amenities
