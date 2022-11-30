@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship
 import os 
 from models.review import Review
-from models.amenity import Amenity
+
 
 metadata = Base.metadata
 
@@ -33,6 +33,7 @@ class Place(BaseModel, Base):
     amenities = relationship("Amenity", secondary="place_amenity", viewonly=False)
 
     if os.getenv('HBNB_TYPE_STORAGE') != 'db':
+        from models.amenity import Amenity
         @property
         def reviews(self):
             from models import storage
