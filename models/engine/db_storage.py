@@ -31,7 +31,8 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """query on the current database session all objects depending of the class name"""
+        """query on the current database session all
+            objects depending of the class name"""
         dic_query = {}
         classes = [User, State, City, Amenity, Place, Review]
 
@@ -41,12 +42,12 @@ class DBStorage:
             objs = self.__session.query(cls).all()
 
             for obj in objs:
-                dic_query[type(obj).__name__+"."+obj.id] = obj # CORREGIR
+                dic_query[type(obj).__name__ + "." + obj.id] = obj  # CORREGIR
         else:
             for elem in classes:
                 objs = self.__session.query(elem).all()
                 for obj in objs:
-                    dic_query[type(obj).__name__+"."+obj.id] = obj
+                    dic_query[type(obj).__name__ + "." + obj.id] = obj
 
         return dic_query
 
@@ -65,7 +66,7 @@ class DBStorage:
     def delete(self, obj=None):
         """deletes from the current database session obj if not None"""
         # self.create_session()
-        if obj is not None: # ...
+        if obj is not None:  # ...
             self.__session.delete(obj)
         # self.__session.commit()
         # self.__session.close()
@@ -73,10 +74,10 @@ class DBStorage:
     def reload(self):
         """creates all tables in the database """
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_factory = sessionmaker(
+            bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
-
 
     # def create_session(self):
     #     """creates a session connection"""
