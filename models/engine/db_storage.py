@@ -41,12 +41,12 @@ class DBStorage:
             objs = self.__session.query(cls).all()
 
             for obj in objs:
-                dic_query[obj.__class__+"."+obj.id] = obj # CORREGIR
+                dic_query[type(obj).__name__+"."+obj.id] = obj # CORREGIR
         else:
             for elem in classes:
                 objs = self.__session.query(elem).all()
                 for obj in objs:
-                    dic_query[obj.__class__+"."+obj.id] = obj
+                    dic_query[type(obj).__name__+"."+obj.id] = obj
 
         return dic_query
 
@@ -73,10 +73,9 @@ class DBStorage:
     def reload(self):
         """creates all tables in the database """
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine)
+        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
-        conn = self.__engine.connect()
-        self.__session = Session(bind=conn, expire_on_commit=False)
+        self.__session = Session()
 
 
     # def create_session(self):
