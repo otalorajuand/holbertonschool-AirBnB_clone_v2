@@ -58,7 +58,7 @@ class test_Place(test_basemodel):
     def test_price_by_night(self):
         """ """
         new = self.value()
-        new.prprice_by_night = 0 
+        new.price_by_night = 0 
         self.assertEqual(type(new.price_by_night), int)
 
     def test_latitude(self):
