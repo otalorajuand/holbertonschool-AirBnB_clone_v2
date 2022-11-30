@@ -137,9 +137,8 @@ class HBNBCommand(cmd.Cmd):
                 value = value.replace("_", " ")
                 setattr(new_instance, key, eval(value))
 
-        storage.save()
         print(new_instance.id)
-        storage.save()
+        new_instance.save()
 
     def help_create(self):
         """ Help information for the create method """
