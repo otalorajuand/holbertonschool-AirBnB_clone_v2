@@ -34,27 +34,31 @@ class test_Place(test_basemodel):
     def test_description(self):
         """ """
         new = self.value()
-        new.name = "fsdfsdf"
+        new.description = "fsdfsdf"
         self.assertEqual(type(new.description), str)
 
     def test_number_rooms(self):
         """ """
         new = self.value()
+        new.number_rooms = 0
         self.assertEqual(type(new.number_rooms), int)
 
     def test_number_bathrooms(self):
         """ """
         new = self.value()
+        new.number_bathrooms = 0
         self.assertEqual(type(new.number_bathrooms), int)
 
     def test_max_guest(self):
         """ """
         new = self.value()
+        new.max_guest = 0
         self.assertEqual(type(new.max_guest), int)
 
     def test_price_by_night(self):
         """ """
         new = self.value()
+        new.prprice_by_night = 0 
         self.assertEqual(type(new.price_by_night), int)
 
     def test_latitude(self):

@@ -63,5 +63,6 @@ class BaseModel:
         from models import storage
         storage.delete(self)
 
+
 new = BaseModel()
 print(new)
