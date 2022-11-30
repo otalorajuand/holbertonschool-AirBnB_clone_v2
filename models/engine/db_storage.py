@@ -29,6 +29,8 @@ class DBStorage:
             os.getenv("HBNB_MYSQL_DB")),
             pool_pre_ping=True)
 
+        State.metadata.create_all(self.__engine)
+
         if os.getenv("HBNB_ENV") == 'test':
             obj_meta.drop_all(self.__engine)
 
