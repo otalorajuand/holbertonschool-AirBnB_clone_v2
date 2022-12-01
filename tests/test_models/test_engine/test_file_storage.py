@@ -31,9 +31,8 @@ class test_fileStorage(unittest.TestCase):
     def test_new(self):
         """ New object is correctly added to __objects """
         new = BaseModel()
-        for obj in storage.all().values():
-            temp = obj
-        self.assertTrue(temp is obj)
+        temp = [obj for obj in storage.all().values()]
+        self.assertTrue(temp is object)
 
     def test_all(self):
         """ __objects is properly returned """
@@ -65,8 +64,7 @@ class test_fileStorage(unittest.TestCase):
         new = BaseModel()
         storage.save()
         storage.reload()
-        for obj in storage.all().values():
-            loaded = obj
+        loaded = [obj for obj in storage.all().values()]
         self.assertEqual(new.to_dict()['id'], loaded.to_dict()['id'])
 
     def test_reload_empty(self):
