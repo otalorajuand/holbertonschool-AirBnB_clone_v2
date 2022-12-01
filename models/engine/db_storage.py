@@ -36,13 +36,11 @@ class DBStorage:
         dic_query = {}
         classes = [User, State, City, Amenity, Place, Review]
 
-        # self.create_session()
-
         if cls:
             objs = self.__session.query(cls).all()
 
             for obj in objs:
-                dic_query[type(obj).__name__ + "." + obj.id] = obj  # CORREGIR
+                dic_query[type(obj).__name__ + "." + obj.id] = obj
         else:
             for elem in classes:
                 objs = self.__session.query(elem).all()
@@ -53,11 +51,7 @@ class DBStorage:
 
     def new(self, obj):
         """adds the object to the current database session"""
-        # self.create_session()
-
         self.__session.add(obj)
-        # self.__session.commit()
-        # self.__session.close()
 
     def save(self):
         """commits all changes of the current database session"""
@@ -65,11 +59,8 @@ class DBStorage:
 
     def delete(self, obj=None):
         """deletes from the current database session obj if not None"""
-        # self.create_session()
-        if obj is not None:  # ...
+        if obj is not None:
             self.__session.delete(obj)
-        # self.__session.commit()
-        # self.__session.close()
 
     def reload(self):
         """creates all tables in the database """
@@ -78,9 +69,3 @@ class DBStorage:
             bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
-
-    # def create_session(self):
-    #     """creates a session connection"""
-    #     Session = sessionmaker(bind=self.__engine)
-    #     conn = self.__engine.connect()
-    #     self.__session = Session(bind=conn)
