@@ -23,9 +23,11 @@ class BaseModel:
         self.updated_at = datetime.utcnow()
 
         if kwargs:
-            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
+            if kwargs.get('updated_at'):
+                kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
-            kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
+            if kwargs.get('created_at'):
+                kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             if kwargs.get('__class__'):
                 del kwargs['__class__']
