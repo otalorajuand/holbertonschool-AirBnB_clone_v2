@@ -2,6 +2,7 @@
 """ Module for testing file storage"""
 import unittest
 from models.base_model import BaseModel
+from datetime import datetime
 from models import storage
 import os
 
@@ -28,11 +29,15 @@ class test_fileStorage(unittest.TestCase):
         """ __objects is initially empty """
         self.assertEqual(len(storage.all()), 0)
 
-    def test_new(self):
-        """ New object is correctly added to __objects """
+    # def test_new(self):
+    #     """ New object is correctly added to __objects """
+    #     new = BaseModel()
+    #     self.assertIn(new.__dict__, storage.all().values())
+
+    def test_created_at(self):
+        """"""
         new = BaseModel()
-        temp = [obj for obj in storage.all().values()]
-        self.assertTrue(temp is obj)
+        self.assertTrue(type(new.created_at) is datetime)
         
     def test_all(self):
         """ __objects is properly returned """
@@ -62,9 +67,10 @@ class test_fileStorage(unittest.TestCase):
     def test_reload(self):
         """ Storage file is successfully loaded to __objects """
         new = BaseModel()
-        new.save()
-        new.reload()
-        loaded = [obj for obj in storage.all().values()]
+        storage.save()
+        storage.reload()
+        for obj in storage.all().values():
+            loaded = obj
         self.assertEqual(new.to_dict()['id'], loaded.to_dict()['id'])
 
     def test_reload_empty(self):
@@ -95,11 +101,8 @@ class test_fileStorage(unittest.TestCase):
     def test_key_format(self):
         """ Key is properly formatted """
         new = BaseModel()
-        _id = new.to_dict()['id']
-        for key in storage.all().keys():
-            temp = key
-            print(key)
-        self.assertEqual(temp, 'BaseModel' + '.' + _id)
+        new.save()
+        self.assertIn('BaseModel' + '.' + new.id, storage.all())
 
     def test_storage_var_created(self):
         """ FileStorage object storage created """
