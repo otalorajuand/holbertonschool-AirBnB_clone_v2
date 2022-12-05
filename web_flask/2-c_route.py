@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+"""
+This module contains a simple app in flask
+"""
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/', strict_slashes=False)
+def index():
+    """defines the return for the index"""
+    return "Hello HBNB!"
+
+
+@app.route('/hbnb', strict_slashes=False)
+def hbnb():
+    """defines the return the /hbnb url"""
+    return "HBNB"
+
+
+@app.route('/c/<text>')
+def c_is_fun(text):
+    """defines the return the /c/<text> url"""
+    tesxt = text.replace("_", " ")
+    return f'C {text}'
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
