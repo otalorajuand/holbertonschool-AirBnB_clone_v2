@@ -36,7 +36,7 @@ def python_is_cool(text="is cool"):
 def is_number(n):
     """display “n is a number” only if n is an integer"""
     if int(n):
-        return "n is a number"
+        return f"{n} is a number"
 
 
 if __name__ == "__main__":
