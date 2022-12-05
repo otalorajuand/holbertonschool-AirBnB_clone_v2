@@ -19,10 +19,10 @@ def hbnb():
     return "HBNB"
 
 
-@app.route('/c/<text>')
+@app.route('/c/<text>', strict_slashes=False)
 def c_is_fun(text):
     """defines the return the /c/<text> url"""
-    tesxt = text.replace("_", " ")
+    text = text.replace("_", " ")
     return f'C {text}'
 
 
