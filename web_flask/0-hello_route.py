@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+"""This module contains a simple app in flask"""
 from flask import Flask
 
 app = Flask(__name__)
