@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""This module contains a simple app in flask"""
+"""
+This module contains a simple app in flask
+"""
 from flask import Flask
 
 app = Flask(__name__)
@@ -9,4 +11,5 @@ def index():
     """defines the return for the index"""
     return "Hello HBNB!"
 
-app.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
