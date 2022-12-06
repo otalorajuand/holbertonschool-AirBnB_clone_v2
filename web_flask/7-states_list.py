@@ -13,7 +13,7 @@ app = Flask(__name__)
 def states_list():
     """display a HTML with the states of the db"""
     states = storage.all(State)
-    return render_template('7-states_list.html', states=states.values())
+    return render_template('7-states_list.html', states=sort(states.values()))
 
 
 @app.teardown_appcontext
