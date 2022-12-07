@@ -9,7 +9,7 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route('/states_list', strict_slashes=False)
+@app.route('/cities_by_states', strict_slashes=False)
 def states_list():
     """display a HTML with the states of the db"""
     states = storage.all(State)
