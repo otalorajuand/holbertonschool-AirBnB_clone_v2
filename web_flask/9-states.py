@@ -9,7 +9,6 @@ from models.state import State
 app = Flask(__name__)
 
 
-
 @app.route('/states', strict_slashes=False)
 def states_list():
     """display a HTML with the states of the db"""
@@ -20,12 +19,13 @@ def states_list():
             states.values(),
             key=lambda x: x.name))
 
+
 @app.route('/states/<id>', strict_slashes=False)
 def state_cities(id):
     """display a HTML with the states of the db"""
     states = storage.all(State)
-    flag = True if 'State.'+id in states else False
-    state = states['State.'+id] if flag else None
+    flag = True if 'State.' + id in states else False
+    state = states['State.' + id] if flag else None
     return render_template(
         '9-states.html',
         state=state,
